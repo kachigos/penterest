@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for post in file %}
+    <h2>{{post.title}}</h2>
+    <a href="{{post.adminupload.url}}"
+       download="{{post.adminupload.url}}">Download
+    </a>
+    {% endfor %}
+{% endblock %}

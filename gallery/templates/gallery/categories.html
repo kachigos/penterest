@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main role="main">
+    <section class="mt-4 mb-5">
+    <div class="container-fluid">
+    	<div class="row">
+    		<div class="card-columns">
+				{% for p in posts %}
+    			<div class="card card-pin">
+					{% if p.image %}
+    				<img class="card-img" src="{{p.image.url}}"
+						 alt="Card image">
+					{% else %}
+						<h1>No Image</h1>
+					{% endif %}
+    				<div class="overlay">
+    					<h2 class="card-title title">{{p.title}}</h2>
+    					<div class="more">
+    						<a href="{{ p.get_absolute_url }}"><i
+									class="fa fa-arrow-circle-o-right"
+								   aria-hidden="true"></i> More </a>
+    					</div>
+    				</div>
+    			</div>
+				{% endfor %}
+    		</div>
+    	</div>
+    </div>
+    </section>
+    </main>
+{% endblock content %}

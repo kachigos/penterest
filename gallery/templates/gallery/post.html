@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main role="main">
+        
+    
+    <section class="bg-gray200 pt-5 pb-5">
+    <div class="container">
+    	<div class="row justify-content-center">
+    		<div class="col-md-7">
+    			<article class="card">
+					{% if postview.image %}
+					<img class="card-img-top mb-2" src="{{ postview.image.url }}"
+						 alt="Card image">
+					{% else %}
+						<h1>No Image</h1>
+					{% endif %}
+    			<div class="card-body">
+    				<h1 class="card-title display-4">
+    				{{ postview.title }} </h1>
+    				<ul>
+    					<li>{{ postview.text }}</li>
+    				</ul>
+					<form action="#"
+						  method="post">
+						{% csrf_token %}
+						<small class="d-block"><a class="btn btn-sm btn-gray200"
+											  href="{% url 'detail' %}"><i
+							class="fa fa-external-link"></i> Delete </a></small>
+
+					</form>
+    				<!-- Begin Comments -replace demowebsite with your own id
+                    ================================================== -->
+<!--    				<div id="comments" class="mt-4">-->
+<!--    					<div id="disqus_thread">-->
+<!--    					</div>-->
+<!--    					<script type="text/javascript">-->
+<!--                            var disqus_shortname = 'demowebsite'; -->
+<!--                            var disqus_developer = 0;-->
+<!--                            (function() {-->
+<!--                                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;-->
+<!--                                dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';-->
+<!--                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);-->
+<!--                            })();-->
+<!--                        </script>-->
+<!--    					<noscript>-->
+<!--    					Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>-->
+<!--    					</noscript>-->
+<!--    				</div>-->
+    				<!--End Comments
+                    ================================================== -->
+    			</div>
+    			</article>
+    		</div>
+    	</div>
+    </div>
+    <div class="container-fluid mt-5">
+    	<div class="row">
+    		<h5 class="font-weight-bold">More like this</h5>
+    		<div class="card-columns">
+				{% for p in posts %}
+    			<div class="card card-pin">
+					{% if p.image %}
+						<img class="card-img" src="{{p.image.url}}" alt="Card image">
+					{% else %}
+						<h1>No Image</h1>
+					{% endif %}
+    				<div class="overlay">
+    					<h2 class="card-title title">{{p.title}}</h2>
+    					<div class="more">
+    						<a href="{{ p.get_absolute_url }}">
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    					</div>
+    				</div>
+    			</div>
+				{% endfor %}
+    		</div>
+    	</div>
+    </div>
+    </section>
+        
+    </main>
+{% endblock %}
